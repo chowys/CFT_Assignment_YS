@@ -1,0 +1,30 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Build output
+dist/
+build/
+
+# PID files
+*.pid
+
+# Test coverage
+coverage/
+
+# IDE/editor settings
+*.sublime-project
+*.sublime-workspace
+.vscode/
+
+# Optional: OS-specific files
+.DS_Store
+Thumbs.db
+
+# Optional: npm cache
+.npm/
