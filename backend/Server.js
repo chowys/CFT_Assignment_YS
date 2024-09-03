@@ -1,6 +1,6 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const PORT = 8000;
@@ -12,24 +12,25 @@ app.use(cors());
 // Parse application/x-www-form-urlencoded (form data)
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//Default Route
-app.get('/', (req, res) => {
-    res.send('Calulator Backend is working');
-  });
-
-//Addition logic, returning in application/json format
-app.post('/add', (req, res) => {
+const addRoute = (req, res) => {
   const { number1, number2 } = req.body;
   const result = parseFloat(number1) + parseFloat(number2);
   res.json({ result });
-});
+};
 
-//Subtraction logic, returning in application/json format
-app.post('/subtract', (req, res) => {
+const subtractRoute = (req, res) => {
   const { number1, number2 } = req.body;
   const result = parseFloat(number1) - parseFloat(number2);
   res.json({ result });
+};
+
+//Default Route
+app.get('/', (req, res) => {
+  res.send('Calulator Backend is working');
 });
+
+app.post('/add', addRoute);
+app.post('/subtract', subtractRoute);
 
 // Create a server instance and listen for errors
 const server = app.listen(PORT, () => {
@@ -46,3 +47,8 @@ server.on('error', (err) => {
     process.exit(1); // Exit if another unexpected error occurs
   }
 });
+
+module.exports = {
+  addRoute,
+  subtractRoute
+};
